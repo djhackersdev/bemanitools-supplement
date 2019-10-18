@@ -1,0 +1,91 @@
+;
+; ezusbsys.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=USB
+;ClassGuid={AE18AA60-7F6A-11D4-97DD-00010229B959}
+ClassGuid={36fc9e60-c465-11cf-8056-444553540000}
+Provider=%ManufacturerName%
+CatalogFile=ezusbsys.cat
+DriverVer = 04/27/2019,19.55.31.910
+
+[DestinationDirs]
+DefaultDestDir = 12
+ezusbsys_Device_CoInstaller_CopyFiles = 11
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+ezusbsys.sys  = 1,,
+;
+
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NTx86
+
+[Standard.NTx86]
+%ezusbsys.DeviceDesc%=ezusbsys_Device, USB\VID_0547&PID_2235 
+
+[ezusbsys_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+ezusbsys.sys
+
+[ezusbsys_Device.NT.HW]
+AddReg=ezusbsys_AddReg
+
+[ezusbsys_AddReg]
+; By default, USBDevice class uses iProduct descriptor to name the device in
+; Device Manager on Windows 8 and higher.
+; Uncomment for this device to use %DeviceName% on Windows 8 and higher:
+;HKR,,FriendlyName,,%ezusbsys.DeviceDesc%
+
+;-------------- Service installation
+[ezusbsys_Device.NT.Services]
+AddService = ezusbsys,%SPSVCINST_ASSOCSERVICE%, ezusbsys_Service_Inst
+
+; -------------- ezusbsys driver install sections
+[ezusbsys_Service_Inst]
+DisplayName    = %ezusbsys.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\ezusbsys.sys
+
+;
+;--- ezusbsys_Device Coinstaller installation ------
+;
+
+[ezusbsys_Device.NT.CoInstallers]
+AddReg=ezusbsys_Device_CoInstaller_AddReg
+CopyFiles=ezusbsys_Device_CoInstaller_CopyFiles
+
+[ezusbsys_Device_CoInstaller_AddReg]
+;
+
+
+[ezusbsys_Device_CoInstaller_CopyFiles]
+;
+
+
+[ezusbsys_Device.NT.Wdf]
+KmdfService =  ezusbsys, ezusbsys_wdfsect
+[ezusbsys_wdfsect]
+KmdfLibraryVersion = 1.15
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="Cypress"
+ClassName="Universal Serial Bus devices"
+DiskName = "ezusbsys Installation Disk"
+ezusbsys.DeviceDesc = "Cypress EZ-USB (2235) - EEPROM missing"
+ezusbsys.SVCDESC = "ezusbsys Service"
+REG_MULTI_SZ = 0x00010000
