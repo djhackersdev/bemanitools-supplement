@@ -1,4 +1,6 @@
 # Bemanitools supplement
+[![pipeline status](https://dev.s-ul.eu/djhackers/bemanitools-supplement/badges/master/pipeline.svg)](https://dev.s-ul.eu/djhackers/bemanitools-supplement/commits/master)
+
 Version: 1.2
 
 A collection of various binary files and tools which are required or optional
