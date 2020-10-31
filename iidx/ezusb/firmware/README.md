@@ -1,18 +1,22 @@
 # Firmware binaries Ezusb (legacy): C02 and D01 IO
 Firmware binary blobs. Requires appropriate tools from BT5 to load them to the
-hardware. There are two revisions of firmware images, **v1** and **v2**. 
+hardware. Pick the binary blobs according to your hardware.
 
-Firmware types:
-* `ezusb_XX.bin`: Base firmware which always needs to be uploaded to the board first.
-* `fpga_XX.bin`: FPGA firmware, needs to be uploaded after the base firmware.
-* `sram.bin`: SRAM dump with contents that need to be uploaded as well, only
-relevant when using **v2** files.
+Important: Do not mix different binary blobs from different packages.
 
-**v1** was used on IIDX 9 to 13 and **v2** on IIDX 14 to 24. It does not matter
-which revision of the base firmware and FPGA image as long as you do not mix
-different versions.
+## C02-v1
+Base firmware (`ezusb.bin`) and FPGA program (`fpga.bin`) which were used on IIDX 9 to 13 with the
+C02 IO board.
 
-Still, we recommend using the **v2** binaries as they are, from a development
-standpoint, the latest "update".
+## C02-v2
+Base firmware (`ezusb.bin`), FPGA program (`fpga.bin`) and SRAM contents (`sram.bin`) that are
+written to the C02 IO board on IIDX 14 to 24. Note that all three binary images need to be written
+to the IO using appropriate tooling. 
 
-Exception for D01 boards: Use the `ezusb_v1.bin` and `fpga_v1.bin`, only.
+There have been reports that not all C02 IO boards support the v2 binary data set (apparently, 
+there are different revisions of the board). Therefore, if v2 doesn't work for you, fallback to the
+v1 binary set.
+
+## D01
+Base firmware (`ezusb.bin`) and FPGA program (`fpga.bin`) which were used on IIDX 9 to 13 with the
+D01 IO board.
