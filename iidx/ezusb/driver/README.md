@@ -20,7 +20,7 @@ Next
 * That should be it
 
 ## Installing on Windows 7, 10
-### IMPORATNT: Unsigned drivers
+### IMPORTANT: Unsigned drivers
 The driver is not signed, so you have to allow loading of unsigned drivers. One 
 method to do is this: 
 run in cmd.exe as Administrator:
