@@ -1,0 +1,83 @@
+; 
+;        Created by GenINF. 
+; 
+; 
+ 
+ 
+ 
+[Version] 
+Signature = "$Windows NT$" 
+Class=USB
+ClassGUID={36fc9e60-c465-11cf-8056-444553540000} 
+Provider=%KDE-J% 
+DriverVer= 03/31/2007
+
+[DestinationDirs] 
+p3io.Files.x86_12 = 12 
+
+[SourceDisksNames.x86]
+0=%Desc_x860%
+
+[SourceDisksNames.ia64]
+
+
+[SourceDisksFiles.x86]
+p3io.sys
+
+[SourceDisksFiles.ia64]
+
+
+[Manufacturer] 
+%KDE-J%=KDE-J
+
+[KDE-J]
+%p3ioDesc%=p3io_Inst,USB\VID_0000&PID_5731
+%p3ioDesc%=p3io_Inst,USB\VID_1CCF&PID_8008
+
+[p3io_Inst.ntx86] 
+CopyFiles = p3io.Files.x86_12 
+
+[p3io_Inst.ntx86.Services] 
+AddService = p3io,0x00000002,p3io_Service_Instx86, 
+
+[p3io_Service_Instx86] 
+ServiceType = %SERVICE_KERNEL_DRIVER% 
+StartType = %SERVICE_DEMAND_START% 
+ErrorControl = %SERVICE_ERROR_NORMAL% 
+ServiceBinary = %12%\p3io.sys 
+
+
+[p3io.Files.x86_12] 
+p3io.sys
+
+[p3io_EventLog_Inst] 
+AddReg = p3io_EventLog_Inst.AddReg 
+ 
+[p3io_EventLog_Inst.AddReg] 
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll" 
+HKR,,TypesSupported,%REG_DWORD%,7
+
+
+[Strings] 
+
+;  *******Localizable Strings******* 
+KDE-J= "Konami Degital Entertainment"
+Desc_x860= "Konami Degital Entertainment USBdrivers" 
+p3ioDesc= "python3 I/O board (NEW VID/PID)" 
+
+;  *******Non Localizable Strings******* 
+
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+REG_EXPAND_SZ = 0x00020000 
+REG_DWORD = 0x00010001 
