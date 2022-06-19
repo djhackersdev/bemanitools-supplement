@@ -15,6 +15,12 @@ to run various Bemani arcade games using Bemanitools 5.
 
 # Release history
 ## v1.4
+* Documentation improvements
+* Add compiled SMX driver for ddrio-smx
+* Add driver for IIDX BIO2
+* Add ViGEmClient and ViGEmBus libraries
+* Add GF&DM P3IO driver
+* Add commonly used runtime libraries for bemani games
 
 ## v1.3
 * Add D01 fpga firmware
