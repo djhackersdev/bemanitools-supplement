@@ -19,7 +19,7 @@ $(zipdir)/misc.zip: \
 	$(V)echo ... $@
 	$(V)zip -r $@ $^
 
-$(BUILDDIR)/bemanitools-supplements.zip: \
+$(BUILDDIR)/bemanitools-supplement.zip: \
 		$(zipdir)/iidx.zip \
 		$(zipdir)/misc.zip \
 		README.md \
@@ -28,4 +28,4 @@ $(BUILDDIR)/bemanitools-supplements.zip: \
 	$(V)echo ... $@
 	$(V)zip -j $@ $^
 
-all: $(BUILDDIR)/bemanitools-supplements.zip
+all: $(BUILDDIR)/bemanitools-supplement.zip
