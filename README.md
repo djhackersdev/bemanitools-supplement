@@ -7,6 +7,8 @@ A collection of various binary files and tools which are required or optional
 to run various Bemani arcade games using Bemanitools 5.
 
 # List of games
+* [Dance Dance Revolution](ddr/README.md)
+* [Guitar Freaks & Drummania](gfdm/README.md)
 * [Beatmania IIDX](iidx/README.md)
 
 * [Misc for multiple games](misc/README.md)
