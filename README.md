@@ -16,6 +16,7 @@ to run various Bemani arcade games using Bemanitools 5.
 
 # Release history
 ## v1.5
+* Add popn music ezusb drivers and firmware dump
 
 ## v1.4
 * Documentation improvements
