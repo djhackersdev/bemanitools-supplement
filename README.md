@@ -10,6 +10,7 @@ to run various Bemani arcade games using Bemanitools 5.
 * [Dance Dance Revolution](ddr/README.md)
 * [Guitar Freaks & Drummania](gfdm/README.md)
 * [Beatmania IIDX](iidx/README.md)
+* [pop'n music](popn/README.md)
 
 * [Misc for multiple games](misc/README.md)
 
