@@ -1,0 +1,84 @@
+;/*++
+;
+;Module Name:
+;
+;    P4IO.INF
+;
+;Abstract:
+;    Installation inf for USB I/O PCB (P4IO)
+;
+;--*/
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=USB
+ClassGUID={36fc9e60-c465-11cf-8056-444553540000} 
+Provider=%KDE%
+DriverVer=09/05/2012,1.0.5.1
+CatalogFile=p4io.cat
+
+; ================= Class section =====================
+
+[ClassInstall32]
+Addreg=SampleClassReg     
+
+[SampleClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-5
+
+
+; ================= Device section =====================
+
+[Manufacturer]
+%MfgName%=Kde,NTx86,NTAMD64
+
+; For WindowsXP 32bit
+[Kde.NTx86]
+%USB\VID_045E&PID_930A.DeviceDesc%=p4io.Dev, USB\VID_1CCF&PID_8010
+
+; For Windows7 64bit
+[Kde.NTAMD64]
+%USB\VID_045E&PID_930A.DeviceDesc%=p4io.Dev, USB\VID_1CCF&PID_8010
+
+[p4io.Dev]
+CopyFiles=p4io.Files.Ext
+
+[p4io.Dev.Services]
+AddService = p4io, %SPSVCINST_ASSOCSERVICE%, p4io.AddService
+
+[p4io.AddService]
+DisplayName    = %p4io.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\p4io.sys
+AddReg         = p4io.AddReg
+LoadOrderGroup = Base
+
+[p4io.Files.Ext]
+p4io.sys
+
+[SourceDisksNames]
+1=%Disk_Description%,,,\x86
+2=%Disk_Description%,,,\amd64
+
+[SourceDisksFiles.x86]
+p4io.sys = 1
+
+[SourceDisksFiles.amd64]
+p4io.sys = 2
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+;---------------------------------------------------------------;
+
+[Strings]
+KDE= "Konami Digital Entertainment"
+MfgName="OSR"
+Disk_Description="P4IO Installation Disk"
+USB\VID_045E&PID_930A.DeviceDesc="python4 I/O board"
+p4io.SvcDesc="python4 I/O board"
+ClassName       = "Sample Device"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+

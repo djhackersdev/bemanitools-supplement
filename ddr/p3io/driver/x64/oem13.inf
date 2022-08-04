@@ -1,0 +1,81 @@
+; 
+; Windows USB CDC Driver Setup File for DDR (Windows7)
+;
+;	(C)2016 Konami Amusement Co., Ltd.
+; 
+; 
+ 
+ 
+ 
+[Version] 
+Signature = "$Windows NT$" 
+Class=Ports
+ClassGUID={4d36e978-e325-11ce-bfc1-08002be10318} 
+Provider=%ProviderName% 
+DriverVer= 12/29/2016,1.1.0.0
+CatalogFile=ddrmem_win7.cat
+
+[DestinationDirs] 
+DefaultDestDir = 12 
+
+[MANUFACTURER] 
+%ProviderName%=DeviceList, NTx86, NTamd64 
+
+[DeviceList.NTx86] 
+%ddrmemDesc%=DriverInstall,USB\VID_1CCF&PID_8004 
+
+[DeviceList.NTamd64] 
+%ddrmemDesc%=DriverInstall,USB\VID_1CCF&PID_8004 
+
+;--------------------------------------------------------------------------
+; Device driver
+;--------------------------------------------------------------------------
+
+[DriverInstall] 
+include = mdmcpq.inf 
+CopyFiles = FakeModemCopyFileSection 
+AddReg = LowerFilterAddReg,SerialPropPageAddReg 
+
+[DriverInstall.Services] 
+include = mdmcpq.inf 
+AddService = usbser, 0x00000002, ddrmem_Service_Inst 
+
+[SerialPropPageAddReg] 
+HKR,,DevLoader,,*ntkern 
+HKR,,NTMPDriver,,usbser.sys 
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider" 
+
+;--------------------------------------------------------------------------
+; Services
+;--------------------------------------------------------------------------
+
+[ddrmem_Service_Inst] 
+DisplayName	= %SERVICE% 
+ServiceType = %SERVICE_KERNEL_DRIVER% 
+StartType = %SERVICE_DEMAND_START% 
+ErrorControl = %SERVICE_ERROR_IGNORE% 
+ServiceBinary = %12%\usbser.sys 
+
+;--------------------------------------------------------------------------
+; Strings
+;--------------------------------------------------------------------------
+
+[Strings] 
+ProviderName = "Konami Amusement" 
+ddrmemDesc= "DDR USB Virtual COM Port" 
+SERVICE	= "DDR USB memory Driver" 
+
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+REG_EXPAND_SZ = 0x00020000 
+REG_DWORD = 0x00010001 
