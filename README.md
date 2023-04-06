@@ -1,6 +1,6 @@
 # Bemanitools supplement
 
-Version: 1.6
+Version: 1.7
 
 A collection of various binary files and tools which are required or optional
 to run various Bemani arcade games using Bemanitools 5.
@@ -15,6 +15,12 @@ to run various Bemani arcade games using Bemanitools 5.
 * [Misc for multiple games](misc/README.md)
 
 # Release history
+
+## v1.7
+
+### Features
+
+### Fixes
 
 ## v1.6
 
