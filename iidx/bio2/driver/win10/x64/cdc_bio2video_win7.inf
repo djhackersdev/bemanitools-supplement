@@ -1,0 +1,106 @@
+;--------------------------------------------------------
+;	KDE
+;
+;	Communication Device Class
+;	Virtual Serial Port
+;	
+;	2017/06/14
+;--------------------------------------------------------
+
+[Version]
+Signature="$Windows NT$"
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider=%MANUFACTURER%
+LayoutFile=layout.inf
+CatalogFile=CDC_bio2video_Win7.cat
+
+DriverVer= 06/14/2017,1.1.2600.0
+
+[Manufacturer]
+%MANUFACTURER%=DeviceList,nt,NTamd64
+
+[DestinationDirs]
+DefaultDestDir=12
+
+
+;--------------------------------------------------------
+;              Windows 2000/XP/Vista32 Support
+;--------------------------------------------------------
+[DriverInstall.nt]
+include=mdmcpq.inf
+CopyFiles=DriverCopyFiles.nt
+AddReg=DriverInstall.nt.AddReg
+
+[DriverCopyFiles.nt]
+usbser.sys,,,0x20
+
+[DriverInstall.nt.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,%DRIVERFILENAME%.sys
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[DriverInstall.nt.Services]
+AddService=usbser, 0x00000002, DriverService.nt
+
+[DriverService.nt]
+DisplayName=%SERVICE%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\%DRIVERFILENAME%.sys
+
+;--------------------------------------------------------
+;              Windows Vista64 Support
+;--------------------------------------------------------
+
+[DriverInstall.NTamd64]
+include=mdmcpq.inf
+CopyFiles=DriverCopyFiles.NTamd64
+AddReg=DriverInstall.NTamd64.AddReg
+
+[DriverCopyFiles.NTamd64]
+%DRIVERFILENAME%.sys,,,0x20
+
+[DriverInstall.NTamd64.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,%DRIVERFILENAME%.sys
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[DriverInstall.NTamd64.Services]
+AddService=usbser, 0x00000002, DriverService.NTamd64
+
+[DriverService.NTamd64]
+DisplayName=%SERVICE%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\%DRIVERFILENAME%.sys
+
+
+
+;**********************************************
+; Please change to your company's information *
+;**********************************************
+[SourceDisksFiles]
+[SourceDisksNames]
+[DeviceList.nt]
+%DESCRIPTION%=DriverInstall, USB\VID_1CCF&PID_804C
+%DESCRIPTION%=DriverInstall, USB\VID_1CCF&PID_8040
+
+[DeviceList.NTamd64]
+%DESCRIPTION%=DriverInstall, USB\VID_1CCF&PID_804C
+%DESCRIPTION%=DriverInstall, USB\VID_1CCF&PID_8040
+
+
+;**********************************************
+; Please change to your company's information *
+;**********************************************
+[Strings]
+
+FILENAME="Kam_bio2video_cdc"
+DRIVERFILENAME ="usbser"
+MANUFACTURER="KAM"
+INSTDISK="USB2UART"
+DESCRIPTION="KAM BIO2(VIDEO) CDC DRIVER"
+SERVICE="KAM BIO2(VIDEO) CDC DRIVER"

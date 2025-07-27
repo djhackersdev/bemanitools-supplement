@@ -1,6 +1,7 @@
 # Driver for IIDX BIO2
 Currently, this package offers drivers for the following platforms:
-* Windows 7: x64 (confirmed to work on Windows 10)
+* Windows 7: x64
+* Windows 10: x64
 
 ### Install
 * Plug in the device and Windows should recognize it automatically
